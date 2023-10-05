@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    container_name: trent-app    
+    container_name: my-app    
     build:
       dockerfile: 'Dockerfile.dev'
     depends_on:
@@ -14,33 +14,33 @@ services:
       - PORT=3030
       - DB_HOST=postgres
       - DB_PORT=5432
-      - DB_USERNAME=tasdbuser
-      - DB_PASSWORD=pass123456
-      - DB_DATABASE=tasdb
+      - DB_USERNAME=myuser
+      - DB_PASSWORD=password123
+      - DB_DATABASE=mydb
       - DB_TYPE=postgres
       - SMTP_SERVER=mailhog
       - SMTP_PORT=1025
-      - JWT_SECRET=Trent_Secret_123
+      - JWT_SECRET=My_Secret_123
       - JWT_EXPIRES_IN=1d
-      - COOKIE_NAME=TrentSecureCookie
+      - COOKIE_NAME=MySecureCookie
     volumes:
       - ./:/app/
   
   postgres:
-    container_name: trent-db
+    container_name: my-db
     image: postgis/postgis:15-3.3
     restart: always
     environment:
-      - POSTGRES_USER=tasdbuser
-      - POSTGRES_PASSWORD=pass123456
-      - POSTGRES_DB=tasdb
+      - POSTGRES_USER=mydbuser
+      - POSTGRES_PASSWORD=mypass123456
+      - POSTGRES_DB=mydb
     ports:
       - "5050:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
   
   mailhog:
-    container_name: trent-mailhog
+    container_name: my-mailhog
     image: mailhog/mailhog
     restart: always
     ports: 
